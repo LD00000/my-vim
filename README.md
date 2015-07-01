@@ -1,6 +1,6 @@
 # my-vim
 
-my vim Vbundle setting.Use it on Linux.
+My vim Vundle setting.Use it on Linux.
 
 #install
 

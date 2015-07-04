@@ -1,15 +1,175 @@
 "============================================================
 "============================================================
 "    FileName:  .vimrc
-"    Author:    
-"    Version:   
-"    Email:     
-"    Blog:      
-"    Date:      
-"    Change:    
+"    Author: 	LD00000   
+"    Version:	1.0   
+"    Email: 	lidong9144@163.com     
 "============================================================
 "============================================================
 
+
+"==============================================================
+""==============================================================
+"
+"" Vundle插件管理和配置项
+"
+""==============================================================
+"==============================================================
+"
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+"设置vim路径并初始化
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"或者，设置Vundle安装插件的路径
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+"以下为官方引入插件方法示例
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+"Plugin 'tpope/vim-fugitive'
+" plugin from http://vim-scripts.org/vim/scripts.html
+"Plugin 'L9'
+" Git plugin not hosted on GitHub
+"Plugin 'git://git.wincent.com/command-t.git'
+" git repos on your local machine (i.e. when working on your own plugin)
+"Plugin 'file:///home/gmarik/path/to/plugin'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+"Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Avoid a name conflict with L9
+"Plugin 'user/L9', {'name': 'newL9'}
+
+"=====================================================
+" 具体用法查询插件文档
+"=====================================================
+
+" Fugitive: Git 集成
+Plugin 'tpope/vim-fugitive'
+
+" Solarized - precision colorscheme for the vim text editor
+" 配色
+Plugin 'altercation/vim-colors-solarized'
+
+syntax enable	"开启语法高亮
+set background=dark
+"set background=light
+set t_Co=256	"指定配色方案为256色
+let g:solarized_termcolors=256
+colorscheme solarized
+"if has('gui_running')
+"    set background=light
+"else
+"    set background=dark
+"endif
+
+" Commentary - Comment stuff out
+" 快速注释
+Plugin 'tpope/vim-commentary'
+
+" YouCompleteMe - A code-completion engine for Vim
+" 代码自动补全
+Plugin 'Valloric/YouCompleteMe'
+
+"nerdtree - A tree explorer plugin for vim.
+"树形浏览
+Plugin 'scrooloose/nerdtree'
+
+let NERDChristmasTree=0
+let NERDTreeWinSize=25
+let NERDTreeChDirMode=2
+let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$']
+let NERDTreeShowBookmarks=1
+let NERDTreeWinPos="left"
+" Automatically open a NERDTree if no files where specified
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" Close vim if the only window left open is a NERDTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+" Open a NERDTree
+nmap <F6> :NERDTreeToggle<cr>
+
+"Vim plugin that displays tags in a window
+"浏览文件结构
+Plugin 'majutsushi/tagbar'
+
+let g:tagbar_width=25
+let g:tagbar_autofocus=1
+nmap <F7> :TagbarToggle<CR>
+
+"ctrlp.vim - Fuzzy file, buffer, mru, tag, etc finder
+"搜索
+Plugin 'kien/ctrlp.vim'
+
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.png,*.jpg,*.jpeg,*.gif " MacOSX/Linux
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+nmap <F8> :CtrlpToggle<CR>
+
+"Powerline - a statusline plugin for vim
+"下方状态条
+"Plugin 'powerline/powerline'
+
+"set laststatus=2 "Always display the status line
+"set statusline+=%{fugitive#statusline()} "Git Hotness
+
+"airline - lean & mean status/tabline for vim that's light as air 
+"下方状态条
+Plugin 'bling/vim-airline'
+
+"Syntastic - Syntax checking hacks for vim 
+"语法检查
+Plugin 'scrooloose/syntastic'
+
+let g:syntastic_check_on_open=1
+let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_wq = 0
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+
+
+
+" Airline: 小巧美观的状态栏。
+"Plugin 'bling/vim-airline'
+
+" MATLAB/MATLAB-fold: MATLAB 语法高亮及代码折叠插件。
+"Plugin 'djoshea/vim-matlab'
+"Plugin 'djoshea/vim-matlab-fold'
+
+" Tabular: 自动对齐。
+"Plugin 'godlygeek/tabular'
+
+
+
+" All of your Plugins must be added before the following line
+"所有插件必须在这行之前添加
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+"		    - 列出配置的插件	
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+"		    - 安装插件;添加'!'来更新或者输入 :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+"		    - 查找插件；添加'!'来刷新当地缓存
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"		    - 删除列表中没有的插件；添加'!'删除时自动确认
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
 
 
 "=============================================================
@@ -20,10 +180,8 @@
 "=============================================================
 "=============================================================
 
-"关闭vi的一致性模式 避免以前版本的一些Bug和局限
-set nocompatible
 "配置backspace键工作方式
-set backspace=indent,eol,start
+"set backspace=indent,eol,start
 
 
 "显示行号
@@ -45,6 +203,7 @@ set noswapfile
 
 "突出现实当前行列、高亮当前行列
 "配置主题后再开启该这两个功能(比如solarized) 否则会很难看
+" Highlight current line
 set cursorline
 set cursorcolumn
 
@@ -54,13 +213,6 @@ set showmatch
 "设置C/C++方式自动对齐
 set autoindent
 set cindent
-
-"开启语法高亮功能
-syntax enable
-syntax on
-
-"指定配色方案为256色
-set t_Co=256
 
 "设置搜索时忽略大小写
 set ignorecase
@@ -77,7 +229,7 @@ set softtabstop=4
 "设置按退格键时可以一次删除4个空格
 set smarttab
 "将Tab键自动转换成空格 真正需要Tab键时使用[Ctrl + V + Tab]
-set expandtab
+"set expandtab
 
 "设置编码方式
 set encoding=utf-8
@@ -87,13 +239,13 @@ set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 
 
 "检测文件类型
-filetype on
+"filetype on
 "针对不同的文件采用不同的缩进方式
-filetype indent on
+"filetype indent on
 "允许插件
-filetype plugin on
+"filetype plugin on
 "启动智能补全
-filetype plugin indent on
+"filetype plugin indent on
 
 "===================================================================
 "===================================================================
@@ -158,62 +310,3 @@ function Do_OneFileMake()
     execute "q"
 endfunction
 
-"==============================================================
-""==============================================================
-"
-"" Vundle插件管理和配置项
-"
-""==============================================================
-"==============================================================
-"
-""开始使用Vundle的必须配置
-set nocompatible
-filetype off
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-
-"=== 使用Vundle来管理Vundle ===
-Bundle 'gmarik/vundle'
-"
-""=== PowerLine插件 状态栏增强展示 ===
-Bundle 'Lokaltog/vim-powerline'
-"vim有一个状态栏 加上powline则有两个状态栏
-set laststatus=2
-set t_Co=256
-let g:Powline_symbols='fancy'
-
-
-"=== YouCompleteMe 自动补全插件 迄今为止用到的最好的自动VIM自动补全插件===
-Bundle 'Valloric/YouCompleteMe'
-""自动补全配置插件路径
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
-"youcompleteme 默认tab s-tab 和自动补全冲突
-"自动补全时向下选择补全项
-let g:ycm_key_list_select_completion = ['<Down>']
-"自动补全时向上选择补全项
-let g:ycm_key_list_previous_completion = ['<Up>']"
-"在自动补全时 默认会在vim顶部出现一个提示窗口(preview窗口) 很扰乱视野
-"这样设置从不出现preview窗口 可以试试加上和不加上此项的效果
-"根据个人喜欢是否出现preview窗口
-"即补全窗口不以分割窗口出现 只出现补全列表
-set completeopt-=preview
-"语法分析时 有警告时出现在左边的符号
-let g:ycm_warning_symbol = '>>'
-"语法分析时 有错误出现在左边的符号
-let g:ycm_error_symbol = 'xx'
-"设置在注释中 补全功能仍然有效
-let g:ycm_complete_in_comments = 1
-
-"=== 主题solarized ===
-Bundle 'altercation/vim-colors-solarized'
-let g:solarized_termtrans=1
-let g:solarized_contrast="normal"
-let g:solarized_visibility="normal"
-
-"设置当前使用的主题
-colorscheme solarized
-set background=dark
-set t_Co=256
-
-"Vundle配置必须 开启插件
-filetype plugin indent on

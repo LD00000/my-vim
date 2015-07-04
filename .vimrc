@@ -96,7 +96,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 " Open a NERDTree
 nmap <F6> :NERDTreeToggle<cr>
 
-"Vim plugin that displays tags in a window
+"tagbar - Vim plugin that displays tags in a window
 "浏览文件结构
 Plugin 'majutsushi/tagbar'
 
@@ -138,9 +138,6 @@ set statusline+=%*
 
 
 
-
-" Airline: 小巧美观的状态栏。
-"Plugin 'bling/vim-airline'
 
 " MATLAB/MATLAB-fold: MATLAB 语法高亮及代码折叠插件。
 "Plugin 'djoshea/vim-matlab'
